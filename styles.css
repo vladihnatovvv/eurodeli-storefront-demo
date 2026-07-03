@@ -854,6 +854,87 @@ img {
   font-size: 15px;
 }
 
+.site-form {
+  display: grid;
+  gap: 16px;
+}
+
+.site-form label {
+  display: grid;
+  gap: 8px;
+}
+
+.site-form span {
+  font-weight: 600;
+}
+
+.site-form input,
+.site-form textarea {
+  width: 100%;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  padding: 14px 16px;
+  font: inherit;
+  background: var(--surface);
+}
+
+.site-form textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.form-actions {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.form-note {
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.site-toast {
+  position: fixed;
+  right: 18px;
+  bottom: 18px;
+  z-index: 80;
+  max-width: 360px;
+  padding: 14px 18px;
+  border-radius: 18px;
+  background: #111111;
+  color: #ffffff;
+  box-shadow: var(--shadow);
+  opacity: 0;
+  transform: translateY(14px);
+  pointer-events: none;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+.site-toast.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.map-placeholder {
+  display: flex;
+  align-items: end;
+  padding: 24px;
+}
+
+.cart-checkout-form {
+  margin-top: 18px;
+  padding-top: 18px;
+  border-top: 1px solid var(--line);
+}
+
 .footer {
   margin-top: 34px;
   background: #111111;
@@ -1210,7 +1291,8 @@ img {
   }
 
   .brand-strip,
-  .newsletter {
+  .newsletter,
+  .form-grid {
     grid-template-columns: 1fr;
   }
 

@@ -151,6 +151,7 @@ const PRODUCTS = [
 ];
 
 const CART_STORAGE_KEY = "eurodeli-cart-items";
+let toastTimer = null;
 
 function currentPage() {
   const path = window.location.pathname.split("/").pop();
@@ -159,6 +160,27 @@ function currentPage() {
 
 function formatPrice(value) {
   return `${value} грн`;
+}
+
+function showToast(message) {
+  let toast = document.querySelector("[data-site-toast]");
+  if (!toast) {
+    toast = document.createElement("div");
+    toast.className = "site-toast";
+    toast.setAttribute("data-site-toast", "");
+    document.body.appendChild(toast);
+  }
+
+  toast.textContent = message;
+  toast.classList.add("is-visible");
+
+  if (toastTimer) {
+    window.clearTimeout(toastTimer);
+  }
+
+  toastTimer = window.setTimeout(() => {
+    toast.classList.remove("is-visible");
+  }, 2600);
 }
 
 function currentQuery() {
@@ -534,7 +556,22 @@ function renderCartPage() {
         <h3>Ваше замовлення</h3>
         <div class="cart-summary__row"><span>Товарів</span><strong>${getCartCount()}</strong></div>
         <div class="cart-summary__row"><span>До сплати</span><strong>${formatPrice(total)}</strong></div>
-        <button class="btn btn--brand" type="button">Оформити замовлення</button>
+        <button class="btn btn--brand" type="button" data-checkout-toggle>Оформити замовлення</button>
+        <form class="site-form cart-checkout-form" data-checkout-form hidden>
+          <label>
+            <span>Ім'я</span>
+            <input type="text" name="name" placeholder="Ваше ім'я" required>
+          </label>
+          <label>
+            <span>Телефон</span>
+            <input type="tel" name="phone" placeholder="+38 (0__) ___-__-__" required>
+          </label>
+          <label>
+            <span>Коментар до замовлення</span>
+            <textarea name="comment" rows="4" placeholder="Наприклад: зателефонувати перед відправкою"></textarea>
+          </label>
+          <button class="btn btn--brand" type="submit">Підтвердити замовлення</button>
+        </form>
       </aside>
     </div>
   `;
@@ -554,6 +591,33 @@ function renderCartPage() {
       removeCartItem(button.getAttribute("data-remove-item"));
     });
   });
+
+  const checkoutToggle = cartRoot.querySelector("[data-checkout-toggle]");
+  const checkoutForm = cartRoot.querySelector("[data-checkout-form]");
+
+  if (checkoutToggle && checkoutForm) {
+    checkoutToggle.addEventListener("click", () => {
+      checkoutForm.hidden = false;
+      checkoutToggle.hidden = true;
+      checkoutForm.querySelector("input")?.focus();
+    });
+
+    checkoutForm.addEventListener("submit", (event) => {
+      event.preventDefault();
+      const formData = new FormData(checkoutForm);
+      const name = String(formData.get("name") || "").trim();
+      const phone = String(formData.get("phone") || "").trim();
+      if (!name || !phone) {
+        showToast("Заповніть ім'я та телефон для оформлення.");
+        return;
+      }
+
+      localStorage.removeItem(CART_STORAGE_KEY);
+      updateCartCount();
+      renderCartPage();
+      showToast(`Замовлення для ${name} прийнято. Менеджер зв'яжеться найближчим часом.`);
+    });
+  }
 }
 
 function renderSearchResults(resultsHost, results) {
@@ -676,6 +740,66 @@ function initSearch() {
   });
 }
 
+function initNewsletterForm() {
+  const form = document.querySelector("[data-newsletter-form]");
+  if (!form) return;
+
+  form.addEventListener("submit", (event) => {
+    event.preventDefault();
+    const email = form.querySelector('input[name="email"]')?.value.trim() || "";
+    if (!email || !email.includes("@")) {
+      showToast("Введіть коректний email для підписки.");
+      return;
+    }
+
+    form.reset();
+    showToast("Дякуємо! Підписку на акції та новинки оформлено.");
+  });
+}
+
+function initContactForm() {
+  const form = document.querySelector("[data-contact-form]");
+  if (!form) return;
+
+  const params = currentQuery();
+  const topic = params.get("topic") || "";
+  const product = params.get("product") || "";
+  const hiddenTopic = form.querySelector('input[name="topic"]');
+  const messageField = form.querySelector('textarea[name="message"]');
+  const contextBadge = document.querySelector("[data-contact-context]");
+
+  if (hiddenTopic) {
+    hiddenTopic.value = topic;
+  }
+
+  if (contextBadge && topic) {
+    contextBadge.hidden = false;
+    contextBadge.textContent = topic === "one-click" && product ? `Швидке замовлення: ${product}` : "Заявка з сайту";
+  }
+
+  if (messageField && topic === "one-click" && product && !messageField.value.trim()) {
+    messageField.value = `Хочу оформити швидке замовлення на товар: ${product}.`;
+  }
+
+  form.addEventListener("submit", (event) => {
+    event.preventDefault();
+    const formData = new FormData(form);
+    const name = String(formData.get("name") || "").trim();
+    const phone = String(formData.get("phone") || "").trim();
+    if (!name || !phone) {
+      showToast("Заповніть ім'я та телефон, щоб надіслати заявку.");
+      return;
+    }
+
+    form.reset();
+    if (hiddenTopic) hiddenTopic.value = topic;
+    if (messageField && topic === "one-click" && product) {
+      messageField.value = `Хочу оформити швидке замовлення на товар: ${product}.`;
+    }
+    showToast("Заявку надіслано. Менеджер зв'яжеться з вами найближчим часом.");
+  });
+}
+
 function initCart() {
   updateCartCount();
 
@@ -689,6 +813,7 @@ function initCart() {
 
       const initialText = button.classList.contains("product-add") ? "+" : "Додати в кошик";
       button.textContent = button.classList.contains("product-add") ? "✓" : "Додано";
+      showToast(`Товар "${product.name}" додано в кошик.`);
       window.setTimeout(() => {
         button.textContent = initialText;
       }, 900);
@@ -728,5 +853,7 @@ document.addEventListener("DOMContentLoaded", () => {
   initProductGallery();
   initSliders();
   initSearch();
+  initNewsletterForm();
+  initContactForm();
   renderCartPage();
 });

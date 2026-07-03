@@ -212,9 +212,9 @@
             <h2 style="margin: 12px 0 8px;">Дізнавайтеся першими про новинки та знижки</h2>
             <p style="color: var(--muted); margin: 0;">Підписуйтеся, щоб першими отримувати нові надходження, знижки й подарункові добірки.</p>
           </div>
-          <form class="newsletter-form">
-            <input type="email" placeholder="Ваш email">
-            <button class="btn btn--brand" type="button">Підписатися</button>
+          <form class="newsletter-form" data-newsletter-form>
+            <input type="email" name="email" placeholder="Ваш email" aria-label="Email для розсилки" required>
+            <button class="btn btn--brand" type="submit">Підписатися</button>
           </form>
         </div>
       </div>

@@ -23,11 +23,11 @@
         <div class="grid grid--contacts">
           <article class="contact-card">
             <h3>Телефон</h3>
-            <p>+38 (000) 000-00-00</p>
+            <p><a href="tel:+380980000000">+38 (098) 000-00-00</a></p>
           </article>
           <article class="contact-card">
             <h3>Email</h3>
-            <p>hello@eurodeli.ua</p>
+            <p><a href="mailto:hello@eurodeli.ua">hello@eurodeli.ua</a></p>
           </article>
           <article class="contact-card">
             <h3>Графік</h3>
@@ -40,8 +40,43 @@
       <div class="split__main">
         <div class="content-card card">
           <h2>Контактна інформація</h2>
-          <p>Тут може бути форма зворотного зв'язку, адреса, реквізити та будь-яка необхідна інформація для швидкого зв'язку з магазином.</p>
-          <div class="map-placeholder"></div>
+          <p>Менеджер підтверджує замовлення, уточнює деталі доставки та допомагає з підбором подарункових наборів або корпоративних добірок.</p>
+          <div class="map-placeholder">
+            <div>
+              <strong>Пункт видачі в Києві</strong>
+              <p style="margin: 10px 0 0;">вул. Хрещатик, 22<br>Щодня з 10:00 до 20:00</p>
+            </div>
+          </div>
+        </div>
+        <div class="content-card card" style="margin-top: 22px;">
+          <span class="eyebrow" data-contact-context hidden></span>
+          <h2>Форма швидкого звернення</h2>
+          <p>Для демо-показу форма працює як готовий сценарій: клієнт лишає контакти, а сайт підтверджує, що заявку прийнято.</p>
+          <form class="site-form" data-contact-form>
+            <input type="hidden" name="topic" value="">
+            <div class="form-grid">
+              <label>
+                <span>Ім'я</span>
+                <input type="text" name="name" placeholder="Ваше ім'я" required>
+              </label>
+              <label>
+                <span>Телефон</span>
+                <input type="tel" name="phone" placeholder="+38 (0__) ___-__-__" required>
+              </label>
+            </div>
+            <label>
+              <span>Email</span>
+              <input type="email" name="email" placeholder="example@email.com">
+            </label>
+            <label>
+              <span>Повідомлення</span>
+              <textarea name="message" rows="5" placeholder="Напишіть, що саме вас цікавить"></textarea>
+            </label>
+            <div class="form-actions">
+              <button class="btn btn--brand" type="submit">Надіслати заявку</button>
+              <span class="form-note">Відповідаємо протягом робочого дня.</span>
+            </div>
+          </form>
         </div>
       </div>
       <aside class="split__side">
