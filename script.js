@@ -151,6 +151,7 @@ const PRODUCTS = [
 ];
 
 const CART_STORAGE_KEY = "eurodeli-cart-items";
+const FAVORITES_STORAGE_KEY = "eurodeli-favorite-items";
 let toastTimer = null;
 
 function currentPage() {
@@ -200,6 +201,58 @@ function slugify(value) {
     .toLowerCase()
     .replace(/[^a-z0-9а-яіїєґ]+/gi, "-")
     .replace(/^-+|-+$/g, "");
+}
+
+function cartButtonMarkup(label = "Додати в кошик") {
+  return `
+    <svg class="btn__icon" viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M3 5H5L7.2 14.2C7.31 14.66 7.81 15 8.32 15H18.4C18.87 15 19.29 14.72 19.47 14.3L21.6 9.3C21.88 8.64 21.39 7.9 20.66 7.9H8.1"></path>
+      <circle cx="9.2" cy="19" r="1.6"></circle>
+      <circle cx="17.2" cy="19" r="1.6"></circle>
+    </svg>
+    <span class="btn__label">${label}</span>
+  `;
+}
+
+function setCartButtonLabel(button, label = "Додати в кошик") {
+  if (!button) return;
+  button.innerHTML = cartButtonMarkup(label);
+}
+
+function setWishlistButtonLabel(button) {
+  if (!button) return;
+  button.innerHTML = `
+    <svg class="product-card__wish-icon" viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M12 21.35 10.55 20.03C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35Z"></path>
+    </svg>
+  `;
+}
+
+function getFavoriteIds() {
+  try {
+    const raw = localStorage.getItem(FAVORITES_STORAGE_KEY);
+    const parsed = raw ? JSON.parse(raw) : [];
+    return Array.isArray(parsed) ? parsed.filter(Boolean) : [];
+  } catch {
+    return [];
+  }
+}
+
+function setFavoriteIds(ids) {
+  localStorage.setItem(FAVORITES_STORAGE_KEY, JSON.stringify(ids));
+}
+
+function isFavorite(productId) {
+  return getFavoriteIds().includes(productId);
+}
+
+function toggleFavorite(productId) {
+  const ids = getFavoriteIds();
+  const next = ids.includes(productId)
+    ? ids.filter((id) => id !== productId)
+    : [...ids, productId];
+  setFavoriteIds(next);
+  return next.includes(productId);
 }
 
 function getCartItems() {
@@ -296,36 +349,70 @@ function renderHeader() {
     <div class="topbar">
       <div class="container topbar__inner">
         <div class="topbar__meta">
-          <span>Працюємо щодня: 09:00–20:00</span>
           <span>Доставка по Україні</span>
-          <span>Європейські продукти напряму від постачальників</span>
+          <span>Самовивіз у Києві</span>
+          <span>Пн-Нд: 09:00–20:00</span>
         </div>
         <div class="topbar__links">
+          <a href="sale.html">Акції</a>
+          <a href="new.html">Новинки</a>
+          <a href="contacts.html">Кабінет</a>
+          <a href="contacts.html">Зворотний зв'язок</a>
           <a href="tel:+380980000000">+38 (098) 000-00-00</a>
-          <a href="contacts.html">Передзвоніть мені</a>
         </div>
       </div>
     </div>
     <header class="site-header">
-      <div class="container header__inner">
+      <div class="container header__inner header__inner--reference">
         <a class="brand" href="index.html" aria-label="На головну">
           <div class="brand__title">EuroDeli</div>
-          <div class="brand__subtitle">Інтернет-магазин європейських продуктів</div>
+          <div class="brand__subtitle">Європейські продукти та делікатеси</div>
         </a>
-        <div class="search">
+        <a class="catalog-button" href="catalog.html" aria-label="Відкрити каталог товарів">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <rect x="3" y="4" width="7" height="7" rx="1.5"></rect>
+            <rect x="14" y="4" width="7" height="7" rx="1.5"></rect>
+            <rect x="3" y="13" width="7" height="7" rx="1.5"></rect>
+            <rect x="14" y="13" width="7" height="7" rx="1.5"></rect>
+          </svg>
+          <span>Каталог</span>
+        </a>
+        <div class="search search--retail">
           <input type="search" placeholder="Пошук товарів, брендів, категорій" aria-label="Пошук" data-search-input autocomplete="off">
+          <button class="search-submit" type="button" aria-label="Шукати">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <circle cx="11" cy="11" r="6.5"></circle>
+              <path d="M16 16 21 21"></path>
+            </svg>
+          </button>
           <div class="search-results" data-search-results hidden></div>
         </div>
         <div class="header__actions">
-          <a class="header-chip" href="sale.html">Акції</a>
-          <a class="header-chip" href="new.html">Новинки</a>
-          <a class="header-chip" href="cart.html">Кошик <span data-cart-count>0</span></a>
+          <a class="icon-chip" href="sale.html" aria-label="Акції">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M19 5 5 19"></path>
+              <circle cx="7" cy="7" r="2.2"></circle>
+              <circle cx="17" cy="17" r="2.2"></circle>
+            </svg>
+          </a>
+          <a class="icon-chip" href="index.html" aria-label="Обране">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M12 21.35 10.55 20.03C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35Z"></path>
+            </svg>
+          </a>
+          <a class="icon-chip icon-chip--cart" href="cart.html" aria-label="Кошик">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M3 5H5L7.2 14.2C7.31 14.66 7.81 15 8.32 15H18.4C18.87 15 19.29 14.72 19.47 14.3L21.6 9.3C21.88 8.64 21.39 7.9 20.66 7.9H8.1"></path>
+              <circle cx="9.2" cy="19" r="1.6"></circle>
+              <circle cx="17.2" cy="19" r="1.6"></circle>
+            </svg>
+            <span data-cart-count>0</span>
+          </a>
         </div>
         <button class="menu-toggle" type="button" data-menu-toggle>Меню</button>
       </div>
       <nav class="main-nav" data-main-nav>
         <div class="container main-nav__inner">
-          <a class="catalog-trigger" href="catalog.html">Каталог товарів</a>
           ${navLinks}
         </div>
       </nav>
@@ -348,34 +435,45 @@ function renderFooter() {
   footerHost.innerHTML = `
     <footer class="footer">
       <div class="container footer__top">
-        <div class="footer__brand">
-          <div class="brand__title">EuroDeli</div>
-          <p>Магазин європейських продуктів із охайним каталогом, великими товарними фото, зрозумілими описами та зручною покупкою онлайн.</p>
+        <div class="footer__brand footer-card footer-card--brand">
+          <div class="footer-mark">
+            <div class="footer-mark__crest">ED</div>
+            <div>
+              <div class="footer-mark__title">EuroDeli Market</div>
+              <div class="footer-mark__subtitle">Європейські продукти та делікатеси</div>
+            </div>
+          </div>
+          <p>Інтернет-магазин із продуманим каталогом, великими фото товарів, акційними добірками, кошиком і готовими сторінками для презентації замовниці.</p>
           <div class="footer-payments">
-            <span class="pill">Visa</span>
-            <span class="pill">Mastercard</span>
-            <span class="pill">Оплата при отриманні</span>
+            <span class="pill">Visa / Mastercard</span>
+            <span class="pill">Післяплата</span>
+            <span class="pill">Відправка щодня</span>
           </div>
         </div>
         <div class="footer__cols">
           <div class="footer-card">
-            <h3>Інформація</h3>
-            <div class="footer-links">${links}</div>
-          </div>
-          <div class="footer-card">
             <h3>Контакти</h3>
-            <div class="footer-links">
+            <div class="footer-links footer-links--stack">
               <a href="tel:+380980000000">+38 (098) 000-00-00</a>
               <a href="mailto:hello@eurodeli.ua">hello@eurodeli.ua</a>
               <span>м. Київ, Україна</span>
-            </div>
-          </div>
-          <div class="footer-card">
-            <h3>Графік роботи</h3>
-            <div class="footer-links">
               <span>Пн-Пт: 09:00-20:00</span>
               <span>Сб: 10:00-18:00</span>
               <span>Нд: 10:00-16:00</span>
+            </div>
+          </div>
+          <div class="footer-card">
+            <h3>Про магазин</h3>
+            <div class="footer-links footer-links--stack">${links}</div>
+          </div>
+          <div class="footer-card">
+            <h3>Каталог товарів</h3>
+            <div class="footer-links footer-links--stack">
+              <a href="category.html">Солодощі та шоколад</a>
+              <a href="category.html">Кава та чай</a>
+              <a href="category.html">Паста та бакалія</a>
+              <a href="category.html">Соуси та спеції</a>
+              <a href="catalog.html">Дивитися весь каталог</a>
             </div>
           </div>
         </div>
@@ -383,9 +481,9 @@ function renderFooter() {
       <div class="container footer__bottom">
         <span>© 2026 EuroDeli. Усі права захищені.</span>
         <div class="socials">
-          <span class="pill">Instagram</span>
-          <span class="pill">Facebook</span>
-          <span class="pill">Telegram</span>
+          <a class="pill" href="contacts.html">Instagram</a>
+          <a class="pill" href="contacts.html">Facebook</a>
+          <a class="pill" href="contacts.html">Telegram</a>
         </div>
       </div>
     </footer>
@@ -458,12 +556,26 @@ function initStoreInteractions() {
   document.querySelectorAll(".product-card").forEach((card) => {
     const productLink = card.querySelector("h3 a[href]");
     const addButton = card.querySelector(".product-add, .btn--brand");
+    const wishButton = card.querySelector(".product-card__wish");
     const product = extractProductData(card);
     if (!productLink || !addButton || !product) return;
 
     card.classList.add("product-card--interactive");
     if (!addButton.classList.contains("product-add")) {
-      addButton.textContent = "Додати в кошик";
+      setCartButtonLabel(addButton);
+    }
+    setWishlistButtonLabel(wishButton);
+    if (wishButton) {
+      wishButton.classList.toggle("is-active", isFavorite(product.id));
+      wishButton.setAttribute("aria-pressed", wishButton.classList.contains("is-active") ? "true" : "false");
+      wishButton.addEventListener("click", (event) => {
+        event.preventDefault();
+        event.stopPropagation();
+        const active = toggleFavorite(product.id);
+        wishButton.classList.toggle("is-active", active);
+        wishButton.setAttribute("aria-pressed", active ? "true" : "false");
+        showToast(active ? `Товар "${product.name}" додано в обране.` : `Товар "${product.name}" прибрано з обраного.`);
+      });
     }
     addButton.setAttribute("href", "#");
     addButton.setAttribute("data-add-to-cart", "");
@@ -491,7 +603,7 @@ function initStoreInteractions() {
     mainProductButton.setAttribute("href", "#");
     mainProductButton.setAttribute("data-add-to-cart", "");
     mainProductButton.dataset.product = encodeURIComponent(JSON.stringify(product));
-    mainProductButton.textContent = "Додати в кошик";
+    setCartButtonLabel(mainProductButton);
   }
 }
 
@@ -567,6 +679,14 @@ function renderCartPage() {
             <input type="tel" name="phone" placeholder="+38 (0__) ___-__-__" required>
           </label>
           <label>
+            <span>Email (за бажанням)</span>
+            <input type="email" name="email" placeholder="your@email.com">
+          </label>
+          <label>
+            <span>Адреса доставки</span>
+            <input type="text" name="address" placeholder="Місто, вулиця, будинок, квартира" required>
+          </label>
+          <label>
             <span>Коментар до замовлення</span>
             <textarea name="comment" rows="4" placeholder="Наприклад: зателефонувати перед відправкою"></textarea>
           </label>
@@ -607,8 +727,9 @@ function renderCartPage() {
       const formData = new FormData(checkoutForm);
       const name = String(formData.get("name") || "").trim();
       const phone = String(formData.get("phone") || "").trim();
-      if (!name || !phone) {
-        showToast("Заповніть ім'я та телефон для оформлення.");
+      const address = String(formData.get("address") || "").trim();
+      if (!name || !phone || !address) {
+        showToast("Заповніть ім'я, телефон і адресу для оформлення.");
         return;
       }
 
@@ -683,6 +804,7 @@ function getSearchProducts() {
 function initSearch() {
   const input = document.querySelector("[data-search-input]");
   const resultsHost = document.querySelector("[data-search-results]");
+  const submitButton = document.querySelector(".search-submit");
   if (!input || !resultsHost) return;
   const searchProducts = getSearchProducts();
 
@@ -730,6 +852,15 @@ function initSearch() {
     const term = input.value.trim();
     if (!term) return;
     event.preventDefault();
+    window.location.href = `catalog.html?search=${encodeURIComponent(term)}`;
+  });
+
+  submitButton?.addEventListener("click", () => {
+    const term = input.value.trim();
+    if (!term) {
+      input.focus();
+      return;
+    }
     window.location.href = `catalog.html?search=${encodeURIComponent(term)}`;
   });
 
@@ -812,10 +943,18 @@ function initCart() {
       addToCart(product);
 
       const initialText = button.classList.contains("product-add") ? "+" : "Додати в кошик";
-      button.textContent = button.classList.contains("product-add") ? "✓" : "Додано";
+      if (button.classList.contains("product-add")) {
+        button.textContent = "✓";
+      } else {
+        setCartButtonLabel(button, "Додано");
+      }
       showToast(`Товар "${product.name}" додано в кошик.`);
       window.setTimeout(() => {
-        button.textContent = initialText;
+        if (button.classList.contains("product-add")) {
+          button.textContent = initialText;
+        } else {
+          setCartButtonLabel(button, initialText);
+        }
       }, 900);
     });
   });
@@ -827,8 +966,9 @@ function initSliders() {
     const prev = document.querySelector(`[data-slider-prev="${name}"]`);
     const next = document.querySelector(`[data-slider-next="${name}"]`);
     const step = () => {
-      const firstCard = track.querySelector(".product-card");
-      return firstCard ? firstCard.getBoundingClientRect().width + 16 : 320;
+      const firstItem = track.firstElementChild;
+      const gap = Number.parseFloat(window.getComputedStyle(track).columnGap || window.getComputedStyle(track).gap || "16");
+      return firstItem ? firstItem.getBoundingClientRect().width + gap : 320;
     };
 
     if (prev) {

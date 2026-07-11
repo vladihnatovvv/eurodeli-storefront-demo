@@ -45,18 +45,55 @@
 
     <section class="section">
       <div class="container">
-        <div class="section-head">
+        <div class="section-head section-head--slider">
           <div>
             <h2>Популярні категорії</h2>
-            <p>Категорії для швидкого старту покупця з головної сторінки.</p>
+            <p>Зручний швидкий вхід у головні групи товарів для першого екрану каталогу.</p>
           </div>
-          <a class="btn btn--outline" href="catalog.html">Увесь каталог</a>
+          <div class="slider-actions">
+            <a class="btn btn--outline" href="catalog.html">Увесь каталог</a>
+            <button class="slider-arrow" type="button" data-slider-prev="categories" aria-label="Попередні категорії">‹</button>
+            <button class="slider-arrow" type="button" data-slider-next="categories" aria-label="Наступні категорії">›</button>
+          </div>
         </div>
-        <div class="grid grid--categories">
-          <a class="category-tile category-tile--photo card" href="category.html" style="background-image:url('assets/images/product-cookies.jpg');"><h3>Польські солодощі</h3><span>Шоколад, печиво, вафлі</span></a>
-          <a class="category-tile category-tile--photo card" href="category.html" style="background-image:url('assets/images/product-pasta-good.jpg');"><h3>Італійська паста</h3><span>Паста, соуси, оливки</span></a>
-          <a class="category-tile category-tile--photo card" href="category.html" style="background-image:url('assets/images/aisle.jpg');"><h3>Німецькі снеки</h3><span>Чіпси, крекери, горіхи</span></a>
-          <a class="category-tile category-tile--photo card" href="category.html" style="background-image:url('assets/images/product-coffee-good.jpg');"><h3>Кава та чай</h3><span>Зернова, мелена, капсули</span></a>
+        <div class="categories-slider-wrap">
+          <div class="categories-slider" data-slider-track="categories">
+            <a class="category-showcase card" href="category.html">
+              <div class="category-showcase__media">
+                <img src="assets/images/product-cookies.jpg" alt="Польські солодощі">
+                <span class="category-showcase__pill">Польські солодощі</span>
+              </div>
+              <div class="category-showcase__caption">Шоколад, печиво, вафлі та десерти до кави.</div>
+            </a>
+            <a class="category-showcase card" href="category.html">
+              <div class="category-showcase__media">
+                <img src="assets/images/product-pasta-good.jpg" alt="Італійська паста">
+                <span class="category-showcase__pill">Італійська паста</span>
+              </div>
+              <div class="category-showcase__caption">Паста, соуси, оливки та бакалія для домашньої кухні.</div>
+            </a>
+            <a class="category-showcase card" href="category.html">
+              <div class="category-showcase__media">
+                <img src="assets/images/product-sauce.jpg" alt="Соуси та консерви">
+                <span class="category-showcase__pill">Соуси та консерви</span>
+              </div>
+              <div class="category-showcase__caption">Томатні основи, соуси, оливки та готові європейські закуски.</div>
+            </a>
+            <a class="category-showcase card" href="category.html">
+              <div class="category-showcase__media">
+                <img src="assets/images/product-cheese.jpg" alt="Сири та делікатеси">
+                <span class="category-showcase__pill">Сири та делікатеси</span>
+              </div>
+              <div class="category-showcase__caption">Добірка сирів, м'ясних делікатесів і гастрономічних наборів.</div>
+            </a>
+            <a class="category-showcase card" href="category.html">
+              <div class="category-showcase__media">
+                <img src="assets/images/product-coffee-good.jpg" alt="Кава та чай">
+                <span class="category-showcase__pill">Кава та чай</span>
+              </div>
+              <div class="category-showcase__caption">Зернова, мелена кава, чайні купажі та подарункові набори.</div>
+            </a>
+          </div>
         </div>
       </div>
     </section>
@@ -66,76 +103,213 @@
         <div class="section-head section-head--slider">
           <div>
             <h2>Хіти продажів</h2>
-            <p>Приклад товарної сітки для головної сторінки.</p>
+            <p>Популярні товари, які найчастіше додають у кошик.</p>
           </div>
           <div class="slider-actions">
-            <a class="btn btn--outline" href="catalog.html">Більше товарів</a>
+            <a class="btn btn--outline" href="catalog.html">Переглянути всі</a>
             <button class="slider-arrow" type="button" data-slider-prev="hits" aria-label="Попередні товари">‹</button>
             <button class="slider-arrow" type="button" data-slider-next="hits" aria-label="Наступні товари">›</button>
           </div>
         </div>
         <div class="products-slider-wrap">
-        <div class="products-slider" data-slider-track="hits">
-          <article class="product-card">
-            <div class="product-image"><img src="assets/images/product-chocolate.jpg" alt="Шоколадний набір"></div>
-            <div class="tag-row"><span class="tag tag--sale">Акція</span><span class="tag">В наявності</span></div>
-            <h3><a href="product.html">Belgian Truffles Selection 300 г</a></h3>
-            <p>Асорті м'яких трюфелів у молочному та темному шоколаді для подарунка або сімейного чаювання.</p>
-            <div class="price-row"><div><div class="old-price">389 грн</div><div class="price">329 грн</div></div><a class="btn btn--brand" href="product.html">Купити</a></div>
-          </article>
-          <article class="product-card">
-            <div class="product-image"><img src="assets/images/product-coffee-good.jpg" alt="Кава Lavazza"></div>
-            <div class="tag-row"><span class="tag tag--new">Новинка</span><span class="tag">Топ</span></div>
-            <h3><a href="product.html">Кава Lavazza Crema e Gusto 1 кг</a></h3>
-            <p>Насичений італійський бленд із щільним смаком, що добре підходить для автоматичних кавомашин.</p>
-            <div class="price-row"><div><div class="price">845 грн</div></div><a class="btn btn--brand" href="product.html">Купити</a></div>
-          </article>
-          <article class="product-card">
-            <div class="product-image"><img src="assets/images/product-pasta-good.jpg" alt="Італійська паста"></div>
-            <div class="tag-row"><span class="tag">Хіт</span><span class="tag">Італія</span></div>
-            <h3><a href="product.html">Salvi's Pasta Bundle 3 х 500 г</a></h3>
-            <p>Преміальна добірка італійської пасти з різними формами для домашньої кухні та подарункових наборів.</p>
-            <div class="price-row"><div><div class="price">199 грн</div></div><a class="btn btn--brand" href="product.html">Купити</a></div>
-          </article>
-          <article class="product-card">
-            <div class="product-image"><img src="assets/images/product-cookies.jpg" alt="Печиво та снеки"></div>
-            <div class="tag-row"><span class="tag tag--sale">Знижка</span><span class="tag">Німеччина</span></div>
-            <h3><a href="product.html">Oreo Family Snack Pack</a></h3>
-            <p>Мікс печива та солодких снеків для вечірок, подарунків і швидкого перекусу.</p>
-            <div class="price-row"><div><div class="old-price">249 грн</div><div class="price">215 грн</div></div><a class="btn btn--brand" href="product.html">Купити</a></div>
-          </article>
-        </div>
+          <div class="products-slider products-slider--shelf" data-slider-track="hits">
+            <article class="product-card product-card--shelf">
+              <div class="product-badges"><span class="product-badge product-badge--top">Топ продажів</span><span class="product-badge product-badge--sale">-15.42%</span></div>
+              <div class="product-image"><img src="assets/images/product-chocolate.jpg" alt="Belgian Truffles Selection"></div>
+              <h3><a href="product.html">Belgian Truffles Selection 300 г</a></h3>
+              <div class="product-card__sku">Артикул: ED-1032</div>
+              <div class="product-card__price"><span class="old-price">389,00</span><span class="price">329,00 <span class="product-card__unit">грн / шт.</span></span></div>
+              <div class="product-card__actions"><a class="btn btn--brand" href="product.html">В кошик</a><button class="product-card__wish" type="button" aria-label="В обране">♡</button></div>
+            </article>
+            <article class="product-card product-card--shelf">
+              <div class="product-badges"><span class="product-badge product-badge--top">Топ продажів</span><span class="product-badge product-badge--sale">-9.11%</span></div>
+              <div class="product-image"><img src="assets/images/product-coffee-good.jpg" alt="Lavazza Crema e Gusto"></div>
+              <h3><a href="product.html">Кава Lavazza Crema e Gusto 1 кг</a></h3>
+              <div class="product-card__sku">Італійський бленд</div>
+              <div class="product-card__price"><span class="old-price">930,00</span><span class="price">845,00 <span class="product-card__unit">грн / шт.</span></span></div>
+              <div class="product-card__actions"><a class="btn btn--brand" href="product.html">В кошик</a><button class="product-card__wish" type="button" aria-label="В обране">♡</button></div>
+            </article>
+            <article class="product-card product-card--shelf">
+              <div class="product-badges"><span class="product-badge product-badge--top">Топ продажів</span></div>
+              <div class="product-image"><img src="assets/images/product-pasta-good.jpg" alt="Salvi's Pasta Bundle"></div>
+              <h3><a href="product.html">Salvi's Pasta Bundle 3 х 500 г</a></h3>
+              <div class="product-card__sku">Подарунковий набір</div>
+              <div class="product-card__price"><span class="price">549,00 <span class="product-card__unit">грн / шт.</span></span></div>
+              <div class="product-card__actions"><a class="btn btn--brand" href="product.html">В кошик</a><button class="product-card__wish" type="button" aria-label="В обране">♡</button></div>
+            </article>
+            <article class="product-card product-card--shelf">
+              <div class="product-badges"><span class="product-badge product-badge--top">Топ продажів</span><span class="product-badge product-badge--sale">-13.65%</span></div>
+              <div class="product-image"><img src="assets/images/product-cookies.jpg" alt="Oreo Family Snack Pack"></div>
+              <h3><a href="product.html">Oreo Family Snack Pack</a></h3>
+              <div class="product-card__sku">Мікс снеків</div>
+              <div class="product-card__price"><span class="old-price">249,00</span><span class="price">215,00 <span class="product-card__unit">грн / шт.</span></span></div>
+              <div class="product-card__actions"><a class="btn btn--brand" href="product.html">В кошик</a><button class="product-card__wish" type="button" aria-label="В обране">♡</button></div>
+            </article>
+            <article class="product-card product-card--shelf">
+              <div class="product-badges"><span class="product-badge product-badge--top">Топ продажів</span></div>
+              <div class="product-image"><img src="assets/images/product-candy.jpg" alt="Haribo Starmix"></div>
+              <h3><a href="product.html">Haribo Starmix 175 г</a></h3>
+              <div class="product-card__sku">Желейний мікс</div>
+              <div class="product-card__price"><span class="price">94,00 <span class="product-card__unit">грн / шт.</span></span></div>
+              <div class="product-card__actions"><a class="btn btn--brand" href="product.html">В кошик</a><button class="product-card__wish" type="button" aria-label="В обране">♡</button></div>
+            </article>
+          </div>
         </div>
       </div>
     </section>
 
     <section class="section">
       <div class="container">
-        <div class="grid grid--promo">
-          <article class="promo-card">
-            <div class="promo-card__image">
-              <img src="assets/images/product-cookies.jpg" alt="Акційні солодощі">
-            </div>
-            <h3>Акції тижня</h3>
-            <p>Знижки на популярні солодощі, каву, бакалію та подарункові набори щотижня.</p>
-            <a class="btn btn--outline" href="sale.html">Дивитися акції</a>
-          </article>
-          <article class="promo-card">
-            <div class="promo-card__image">
-              <img src="assets/images/product-pasta-good.jpg" alt="Новинки каталогу">
-            </div>
-            <h3>Новинки каталогу</h3>
-            <p>Свіжі поставки з Європи: нові лінійки шоколаду, пасти, соусів і кавових блендів.</p>
-            <a class="btn btn--outline" href="new.html">Перейти в новинки</a>
-          </article>
-          <article class="promo-card">
-            <div class="promo-card__image">
-              <img src="assets/images/aisle.jpg" alt="Доставка продуктів">
-            </div>
-            <h3>Доставка по Україні</h3>
-            <p>Швидке оформлення, акуратне пакування та зрозумілі умови оплати для покупця.</p>
-            <a class="btn btn--outline" href="shipping.html">Умови доставки</a>
-          </article>
+        <div class="section-head section-head--slider">
+          <div>
+            <h2>Акційні товари</h2>
+            <p>Позиції зі знижками та спеціальними пропозиціями.</p>
+          </div>
+          <div class="slider-actions">
+            <a class="btn btn--outline" href="sale.html">Переглянути всі</a>
+            <button class="slider-arrow" type="button" data-slider-prev="sale-shelf" aria-label="Попередні акційні товари">‹</button>
+            <button class="slider-arrow" type="button" data-slider-next="sale-shelf" aria-label="Наступні акційні товари">›</button>
+          </div>
+        </div>
+        <div class="products-slider-wrap">
+          <div class="products-slider products-slider--shelf" data-slider-track="sale-shelf">
+            <article class="product-card product-card--shelf">
+              <div class="product-badges"><span class="product-badge product-badge--sale">-18%</span></div>
+              <div class="product-image"><img src="assets/images/product-cookies.jpg" alt="Nutella Biscuits"></div>
+              <h3><a href="product.html">Nutella Biscuits 304 г</a></h3>
+              <div class="product-card__sku">Печиво з кремом</div>
+              <div class="product-card__price"><span class="old-price">219,00</span><span class="price">179,00 <span class="product-card__unit">грн / шт.</span></span></div>
+              <div class="product-card__actions"><a class="btn btn--brand" href="product.html">В кошик</a><button class="product-card__wish" type="button" aria-label="В обране">♡</button></div>
+            </article>
+            <article class="product-card product-card--shelf">
+              <div class="product-badges"><span class="product-badge product-badge--sale">-12%</span></div>
+              <div class="product-image"><img src="assets/images/product-coffee-good.jpg" alt="Jacobs Kronung"></div>
+              <h3><a href="product.html">Jacobs Kronung 500 г</a></h3>
+              <div class="product-card__sku">Мелена кава</div>
+              <div class="product-card__price"><span class="old-price">319,00</span><span class="price">279,00 <span class="product-card__unit">грн / шт.</span></span></div>
+              <div class="product-card__actions"><a class="btn btn--brand" href="product.html">В кошик</a><button class="product-card__wish" type="button" aria-label="В обране">♡</button></div>
+            </article>
+            <article class="product-card product-card--shelf">
+              <div class="product-badges"><span class="product-badge product-badge--sale">-20%</span></div>
+              <div class="product-image"><img src="assets/images/product-candy.jpg" alt="Haribo Starmix"></div>
+              <h3><a href="product.html">Haribo Starmix 175 г</a></h3>
+              <div class="product-card__sku">Популярний мікс желейок</div>
+              <div class="product-card__price"><span class="old-price">118,00</span><span class="price">94,00 <span class="product-card__unit">грн / шт.</span></span></div>
+              <div class="product-card__actions"><a class="btn btn--brand" href="product.html">В кошик</a><button class="product-card__wish" type="button" aria-label="В обране">♡</button></div>
+            </article>
+            <article class="product-card product-card--shelf">
+              <div class="product-badges"><span class="product-badge product-badge--sale">-15%</span></div>
+              <div class="product-image"><img src="assets/images/product-pasta-good.jpg" alt="Barilla Fusilli"></div>
+              <h3><a href="product.html">Barilla Fusilli 500 г</a></h3>
+              <div class="product-card__sku">Італійська паста</div>
+              <div class="product-card__price"><span class="old-price">109,00</span><span class="price">92,00 <span class="product-card__unit">грн / шт.</span></span></div>
+              <div class="product-card__actions"><a class="btn btn--brand" href="product.html">В кошик</a><button class="product-card__wish" type="button" aria-label="В обране">♡</button></div>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="section-head section-head--slider">
+          <div>
+            <h2>Новинки каталогу</h2>
+            <p>Свіжі поставки та нові позиції для асортименту магазину.</p>
+          </div>
+          <div class="slider-actions">
+            <a class="btn btn--outline" href="new.html">Переглянути всі</a>
+            <button class="slider-arrow" type="button" data-slider-prev="new-shelf" aria-label="Попередні новинки">‹</button>
+            <button class="slider-arrow" type="button" data-slider-next="new-shelf" aria-label="Наступні новинки">›</button>
+          </div>
+        </div>
+        <div class="products-slider-wrap">
+          <div class="products-slider products-slider--shelf" data-slider-track="new-shelf">
+            <article class="product-card product-card--shelf">
+              <div class="product-badges"><span class="product-badge product-badge--new">Новинка</span></div>
+              <div class="product-image"><img src="assets/images/product-chocolate.jpg" alt="Toblerone White"></div>
+              <h3><a href="product.html">Toblerone White 100 г</a></h3>
+              <div class="product-card__sku">Швейцарський шоколад</div>
+              <div class="product-card__price"><span class="price">119,00 <span class="product-card__unit">грн / шт.</span></span></div>
+              <div class="product-card__actions"><a class="btn btn--brand" href="product.html">В кошик</a><button class="product-card__wish" type="button" aria-label="В обране">♡</button></div>
+            </article>
+            <article class="product-card product-card--shelf">
+              <div class="product-badges"><span class="product-badge product-badge--new">Новинка</span></div>
+              <div class="product-image"><img src="assets/images/product-cookies.jpg" alt="Loacker Quadratini Vanilla"></div>
+              <h3><a href="product.html">Loacker Quadratini Vanilla</a></h3>
+              <div class="product-card__sku">Італійські вафлі</div>
+              <div class="product-card__price"><span class="price">134,00 <span class="product-card__unit">грн / шт.</span></span></div>
+              <div class="product-card__actions"><a class="btn btn--brand" href="product.html">В кошик</a><button class="product-card__wish" type="button" aria-label="В обране">♡</button></div>
+            </article>
+            <article class="product-card product-card--shelf">
+              <div class="product-badges"><span class="product-badge product-badge--new">Новинка</span></div>
+              <div class="product-image"><img src="assets/images/product-sauce.jpg" alt="Heinz Garlic Sauce"></div>
+              <h3><a href="product.html">Heinz Garlic Sauce 220 мл</a></h3>
+              <div class="product-card__sku">Соус до закусок</div>
+              <div class="product-card__price"><span class="price">129,00 <span class="product-card__unit">грн / шт.</span></span></div>
+              <div class="product-card__actions"><a class="btn btn--brand" href="product.html">В кошик</a><button class="product-card__wish" type="button" aria-label="В обране">♡</button></div>
+            </article>
+            <article class="product-card product-card--shelf">
+              <div class="product-badges"><span class="product-badge product-badge--new">Новинка</span></div>
+              <div class="product-image"><img src="assets/images/product-coffee-good.jpg" alt="Costa Coffee Crema Intense"></div>
+              <h3><a href="product.html">Costa Coffee Crema Intense</a></h3>
+              <div class="product-card__sku">Зернова кава</div>
+              <div class="product-card__price"><span class="price">899,00 <span class="product-card__unit">грн / шт.</span></span></div>
+              <div class="product-card__actions"><a class="btn btn--brand" href="product.html">В кошик</a><button class="product-card__wish" type="button" aria-label="В обране">♡</button></div>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="section-head section-head--slider">
+          <div>
+            <h2>Подарункові набори</h2>
+            <p>Готові добірки для подарунка, святкового столу та пробного замовлення.</p>
+          </div>
+          <div class="slider-actions">
+            <a class="btn btn--outline" href="catalog.html">Переглянути всі</a>
+            <button class="slider-arrow" type="button" data-slider-prev="gift-shelf" aria-label="Попередні набори">‹</button>
+            <button class="slider-arrow" type="button" data-slider-next="gift-shelf" aria-label="Наступні набори">›</button>
+          </div>
+        </div>
+        <div class="products-slider-wrap">
+          <div class="products-slider products-slider--shelf" data-slider-track="gift-shelf">
+            <article class="product-card product-card--shelf">
+              <div class="product-badges"><span class="product-badge product-badge--top">Подарунковий набір</span></div>
+              <div class="product-image"><img src="assets/images/product-gift.jpg" alt="EuroDeli Grocery Box"></div>
+              <h3><a href="product.html">EuroDeli Grocery Box</a></h3>
+              <div class="product-card__sku">Мікс бакалії та снеків</div>
+              <div class="product-card__price"><span class="old-price">799,00</span><span class="price">699,00 <span class="product-card__unit">грн / шт.</span></span></div>
+              <div class="product-card__actions"><a class="btn btn--brand" href="product.html">В кошик</a><button class="product-card__wish" type="button" aria-label="В обране">♡</button></div>
+            </article>
+            <article class="product-card product-card--shelf">
+              <div class="product-badges"><span class="product-badge product-badge--top">Подарунковий набір</span></div>
+              <div class="product-image"><img src="assets/images/aisle.jpg" alt="Italian Pantry Essentials Set"></div>
+              <h3><a href="product.html">Italian Pantry Essentials Set</a></h3>
+              <div class="product-card__sku">Паста, соуси, олія</div>
+              <div class="product-card__price"><span class="price">629,00 <span class="product-card__unit">грн / шт.</span></span></div>
+              <div class="product-card__actions"><a class="btn btn--brand" href="product.html">В кошик</a><button class="product-card__wish" type="button" aria-label="В обране">♡</button></div>
+            </article>
+            <article class="product-card product-card--shelf">
+              <div class="product-badges"><span class="product-badge product-badge--top">Подарунковий набір</span></div>
+              <div class="product-image"><img src="assets/images/product-tea.jpg" alt="Tea and Cookies Gift Duo"></div>
+              <h3><a href="product.html">Tea & Cookies Gift Duo</a></h3>
+              <div class="product-card__sku">Чай та печиво</div>
+              <div class="product-card__price"><span class="price">289,00 <span class="product-card__unit">грн / шт.</span></span></div>
+              <div class="product-card__actions"><a class="btn btn--brand" href="product.html">В кошик</a><button class="product-card__wish" type="button" aria-label="В обране">♡</button></div>
+            </article>
+            <article class="product-card product-card--shelf">
+              <div class="product-badges"><span class="product-badge product-badge--top">Подарунковий набір</span></div>
+              <div class="product-image"><img src="assets/images/product-gift.jpg" alt="Sweet Europe Box"></div>
+              <h3><a href="product.html">Sweet Europe Box</a></h3>
+              <div class="product-card__sku">Солодощі з Європи</div>
+              <div class="product-card__price"><span class="price">459,00 <span class="product-card__unit">грн / шт.</span></span></div>
+              <div class="product-card__actions"><a class="btn btn--brand" href="product.html">В кошик</a><button class="product-card__wish" type="button" aria-label="В обране">♡</button></div>
+            </article>
+          </div>
         </div>
       </div>
     </section>
@@ -173,49 +347,60 @@
       </div>
     </section>
 
-    <section class="section">
-      <div class="container split">
-        <div class="split__main">
-          <div class="info-card info-card--dark">
-            <div class="story-image" style="margin-bottom: 20px;">
-              <img src="assets/images/hero.webp" alt="Європейські продукти на вітрині">
-            </div>
-            <h3>Про магазин</h3>
-            <p>EuroDeli Market спеціалізується на популярних продуктах із Європи: солодощах, бакалії, каві, напоях і гастрономічних наборах. У вітрині магазину акцент зроблено на товарах, які легко замовити онлайн, приємно подарувати та зручно повторно купувати.</p>
-            <div class="feature-list" style="margin-top: 18px;">
-              <span class="pill">Прямі поставки</span>
-              <span class="pill">Перевірені бренди</span>
-              <span class="pill">Адаптивний каталог</span>
-              <span class="pill">Швидке оформлення</span>
-            </div>
+    <section class="section section--faq">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <h2>Питання та відповіді</h2>
+            <p>Короткий блок для замовниці: показує, що сайт вже продуманий не лише візуально, а й по довірі до магазину.</p>
           </div>
         </div>
-        <aside class="split__side">
-          <div class="sidebar-card">
-            <h3>Переваги</h3>
-            <div class="mini-list">
-              <span class="pill">Оригінальні товари ЄС</span>
-              <span class="pill">Подарункові бокси</span>
-              <span class="pill">Регулярні акції</span>
-              <span class="pill">Підбір під запит</span>
+        <div class="faq card">
+          <details class="faq-item" open>
+            <summary>
+              <span>Які види продукції ви пропонуєте?</span>
+              <span class="faq-item__icon">+</span>
+            </summary>
+            <div class="faq-item__body">
+              У магазині представлені солодощі, кава, чай, паста, соуси, снеки, європейська бакалія, подарункові набори та делікатеси з Польщі, Італії, Німеччини, Бельгії та інших країн Європи.
             </div>
-          </div>
-        </aside>
-      </div>
-    </section>
-
-    <section class="section">
-      <div class="container">
-        <div class="newsletter card">
-          <div>
-            <span class="eyebrow" style="background: rgba(179, 59, 36, 0.08); border-color: rgba(179, 59, 36, 0.1); color: var(--brand);">Розсилка та акції</span>
-            <h2 style="margin: 12px 0 8px;">Дізнавайтеся першими про новинки та знижки</h2>
-            <p style="color: var(--muted); margin: 0;">Підписуйтеся, щоб першими отримувати нові надходження, знижки й подарункові добірки.</p>
-          </div>
-          <form class="newsletter-form" data-newsletter-form>
-            <input type="email" name="email" placeholder="Ваш email" aria-label="Email для розсилки" required>
-            <button class="btn btn--brand" type="submit">Підписатися</button>
-          </form>
+          </details>
+          <details class="faq-item">
+            <summary>
+              <span>Чи є у вас сертифікати якості?</span>
+              <span class="faq-item__icon">+</span>
+            </summary>
+            <div class="faq-item__body">
+              Так, товари постачаються від офіційних дистриб'юторів і перевірених постачальників. За потреби клієнту можна надати базову супровідну інформацію щодо походження та партії товару.
+            </div>
+          </details>
+          <details class="faq-item">
+            <summary>
+              <span>Як працює доставка по Україні?</span>
+              <span class="faq-item__icon">+</span>
+            </summary>
+            <div class="faq-item__body">
+              Відправлення здійснюється щодня через популярні служби доставки. Є варіанти передплати або післяплати, а менеджер додатково підтверджує склад замовлення перед відправкою.
+            </div>
+          </details>
+          <details class="faq-item">
+            <summary>
+              <span>Чи можна оформити велике або корпоративне замовлення?</span>
+              <span class="faq-item__icon">+</span>
+            </summary>
+            <div class="faq-item__body">
+              Так, магазин підходить і для роздрібних, і для оптових/корпоративних клієнтів. Для великих замовлень можна окремо погоджувати ціну, склад наборів та графік поставки.
+            </div>
+          </details>
+          <details class="faq-item">
+            <summary>
+              <span>Чи можна повернути товар?</span>
+              <span class="faq-item__icon">+</span>
+            </summary>
+            <div class="faq-item__body">
+              Якщо товар має виробничий дефект, пошкодження під час доставки або помилку в комплектації, магазин оперативно погоджує обмін чи повернення відповідно до чинного законодавства України.
+            </div>
+          </details>
         </div>
       </div>
     </section>
